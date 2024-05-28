@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疲劳检测</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/123.jpg'); /* Set background image */
+            background-size: cover;
+            background-attachment: fixed;
+            overflow: hidden; /* Prevent scroll bars */
+        }
+        .navbar {
+            background-color: rgba(51, 51, 51, 0.9); /* Set navbar background color with transparency */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar stays on top */
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd; /* Change color on hover */
+            color: black;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(51, 51, 51, 0.9); /* Set sidebar background color with transparency */
+            padding-top: 60px; /* Adjust padding to accommodate navbar */
+            z-index: 999; /* Ensure sidebar stays on top */
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #f2f2f2;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757; /* Change color on hover */
+            color: white;
+        }
+        .container {
+            text-align: center;
+            margin-left: 260px; /* Adjust margin to accommodate sidebar */
+            margin-top: 80px; /* Adjust margin to accommodate navbar */
+        }
+        #video {
+            border: 2px solid #333;
+            width: 640px;
+            height: 480px;
+            display: block;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add box shadow for video */
+            background-color: white;
+        }
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('/static/leaf.png') no-repeat center center;
+            background-size: cover;
+            pointer-events: none; /* Make sure the leaf doesn't interfere with mouse events */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="http://127.0.0.1:5005/home" class="active">主页</a>
+        <a href="http://127.0.0.1:5001/mouth">疲劳检测-嘴</a>
+        <a href="http://127.0.0.1:5002/call">疲劳检测-打电话</a>
+        <a href="http://127.0.0.1:5000/eye">疲劳检测-眼</a>
+        <a href="http://127.0.0.1:5003/look">疲劳检测-左顾右盼</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#">结果显示</a>
+        <a href="#">打赏作者</a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1>疲劳检测-打电话</h1>
+        <img id="video" src="{{ url_for('video_feed') }}" alt="Eye Detection">
+    </div>
+
+    <!-- JavaScript for Mouse Trail Effect -->
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            let leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.style.left = e.pageX + 'px';
+            leaf.style.top = e.pageY + 'px';
+            document.body.appendChild(leaf);
+
+            // Trigger reflow to restart CSS animation
+            leaf.getBoundingClientRect();
+
+            leaf.style.opacity = 1;
+
+            // Remove leaf after animation
+            setTimeout(function() {
+                leaf.style.opacity = 0;
+                setTimeout(function() {
+                    leaf.remove();
+                }, 500);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

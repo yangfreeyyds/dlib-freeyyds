@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2; /* 设置背景颜色 */
+            overflow: hidden; /* 防止出现滚动条 */
+        }
+        .navbar {
+            background-color: rgba(51, 51, 51, 0.9); /* 设置导航栏背景颜色 */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* 确保导航栏位于最顶层 */
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd; /* 鼠标悬停时的背景颜色 */
+            color: black;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(51, 51, 51, 0.9); /* 侧边栏背景颜色 */
+            padding-top: 60px; /* 调整内边距以适应导航栏 */
+            z-index: 999; /* 确保侧边栏位于最顶层 */
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #f2f2f2;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757; /* 鼠标悬停时的背景颜色 */
+            color: white;
+        }
+        .container {
+            text-align: center;
+            margin-left: 260px; /* 调整外边距以适应侧边栏 */
+            margin-top: 80px; /* 调整外边距以适应导航栏 */
+        }
+        .author-content {
+            background-color: #fff; /* 设置内容区域背景颜色 */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <a href="http://127.0.0.1:5005/home" class="active">主页</a>
+        <a href="http://127.0.0.1:5001/mouth">疲劳检测-嘴</a>
+        <a href="http://127.0.0.1:5002/call">疲劳检测-打电话</a>
+        <a href="http://127.0.0.1:5000/eye">疲劳检测-眼</a>
+        <a href="http://127.0.0.1:5003/look">疲劳检测-左顾右盼</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#">结果显示</a>
+        <a href="#">打赏作者</a>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="container">
+        <div class="author-content">
+
+        </div>
+    </div>
+</body>
+</html>

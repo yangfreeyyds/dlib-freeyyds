@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* 设置登录页面的背景图片 */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/123.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* 添加相对定位 */
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #f0ad4e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="button"]:hover {
+            background-color: #eea236;
+        }
+
+        /* 黑客帝国矩阵雨效果样式 */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* 使画布不接收鼠标事件 */
+            display: none; /* 默认隐藏 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <button id="startButton">彩蛋</button>
+        <button onclick="window.location.href='http://127.0.0.1:5006/register'">Go to Register</button>
+    </div>
+    <!-- 黑客帝国矩阵雨效果的 Canvas -->
+    <canvas id="c"></canvas>
+    <script>
+        var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
+
+        c.height = window.innerHeight;
+        c.width = window.innerWidth;
+
+        var chinese = "杨馥瑞韩沛森梅春根聂馨宇陈嘉敏耿荣昌";
+        chinese = chinese.split("");
+
+        var font_size = 10;
+        var columns = c.width / font_size;
+        var drops = [];
+        for (var x = 0; x < columns; x++) drops[x] = 1;
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            ctx.fillStyle = "#0F0";
+            ctx.font = font_size + "px arial";
+
+            for (var i = 0; i < drops.length; i++) {
+                var text = chinese[Math.floor(Math.random() * chinese.length)];
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+                if (drops[i] * font_size > c.height && Math.random() > 0.975)
+                    drops[i] = 0;
+
+                drops[i]++;
+            }
+        }
+
+        // 启动按钮点击事件
+        document.getElementById("startButton").addEventListener("click", function() {
+            c.style.display = "block"; // 显示矩阵雨效果
+            setInterval(draw, 33); // 启动绘制函数
+            this.style.display = "none"; // 隐藏启动按钮
+        });
+    </script>
+</body>
+</html>
